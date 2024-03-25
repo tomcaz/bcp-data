@@ -12,6 +12,7 @@ const getPaints = async (req, res, next) => {
         next(error)
     }
 }
+
 const updatePaint = async (req, res, next) => {
     const { paint, lane } = req.body
     try {
@@ -22,6 +23,18 @@ const updatePaint = async (req, res, next) => {
         next(error)
     }
 }
+
+const updatePaintAmount = async (req, res, next) => {
+    const { paint, amount } = req.body
+    try {
+        const data = await paintModel.findByIdAndUpdate(paint._id, { paintQty: amount })
+        res.send(data)
+    } catch (error) {
+        console.error()
+        next(error)
+    }
+}
+
 const getOrders = async (req, res, next) => {
     try {
         const data = await orderModel.find();
@@ -31,6 +44,7 @@ const getOrders = async (req, res, next) => {
         next(error)
     }
 }
+
 const saveNewOrder = async (req, res, next) => {
     const {
         address, createdBy, createdAt, paint, amount, status } = req.body
@@ -45,6 +59,7 @@ const saveNewOrder = async (req, res, next) => {
         next(error)
     }
 }
+
 const updateOrder = async (req, res, next) => {
     const { orderId, status } = req.body
     try {
@@ -60,4 +75,4 @@ const updateOrder = async (req, res, next) => {
     }
 }
 
-module.exports = { getPaints, updatePaint, getOrders, saveNewOrder, updateOrder }
+module.exports = { getPaints, updatePaint, updatePaintAmount, getOrders, saveNewOrder, updateOrder }

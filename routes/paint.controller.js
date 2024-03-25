@@ -1,11 +1,11 @@
 const express = require("express")
-const { getPaints } = require("../services/paint.service")
+const { getPaints, updatePaint, getOrders, saveNewOrder, updateOrder } = require("../services/paint.service")
 const app = express.Router()
 
 app.get('/', getPaints)
-app.put('/', updatePaints)
+app.put('/', updatePaint)
 app.get('/orders', getOrders)
-app.put('/orders', updateOrders)
-app.post('/orders', updateOrders)
+app.put('/orders', saveNewOrder)
+app.post('/orders', updateOrder)
 
 module.exports = app

@@ -1,5 +1,6 @@
 const paintModel = require("../models/paint.model")
 const orderModel = require("../models/order.model")
+require("../services/mongo")
 const uuid = require("uuid")
 
 const getPaints = async (req, res, next) => {

@@ -12,3 +12,7 @@ database.on('error', (error) => {
 database.once('connected', () => {
     console.log('Database Connected');
 })
+
+module.exports = {
+    database
+}

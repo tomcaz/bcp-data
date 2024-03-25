@@ -5,7 +5,7 @@ const app = express.Router()
 app.get('/', getPaints)
 app.put('/', updatePaint)
 app.get('/orders', getOrders)
-app.put('/orders', saveNewOrder)
-app.post('/orders', updateOrder)
+app.post('/orders', saveNewOrder)
+app.put('/orders', updateOrder)
 
 module.exports = app

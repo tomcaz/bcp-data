@@ -13,9 +13,10 @@ const getPaints = async (req, res, next) => {
     }
 }
 const updatePaint = async (req, res, next) => {
+    const { paint, lane } = req.body
     try {
-        const data = await paintModel.find();
-        res.json(data)
+        const data = await paintModel.findByIdAndUpdate(paint._id, { lane })
+        res.send(data)
     } catch (error) {
         console.error()
         next(error)
@@ -23,7 +24,7 @@ const updatePaint = async (req, res, next) => {
 }
 const getOrders = async (req, res, next) => {
     try {
-        const data = await paintModel.find();
+        const data = await orderModel.find();
         res.json(data)
     } catch (error) {
         console.error()
@@ -45,8 +46,13 @@ const saveNewOrder = async (req, res, next) => {
     }
 }
 const updateOrder = async (req, res, next) => {
+    const { orderId, status } = req.body
     try {
-        const data = await paintModel.find();
+        const data = await orderModel.findOneAndUpdate({ id: orderId }, { status });
+        if (status === 'pick up') {
+            const paint = await paintModel.findById(data.paint)
+            await paintModel.findByIdAndUpdate(data.paint, { paintQty: paint.paintQty + data.amount })
+        }
         res.json(data)
     } catch (error) {
         console.error()
